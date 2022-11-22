@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getActors, getActorByActorId, addActor } = require('../services/actors.dal')
+const actorsDal = require('../services/actors.dal')
 
 router.get('/', async (req, res) => {
     // const theActors = [
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     //     {first_name: 'Regina', last_name: 'King'}
     // ];
     try {
-        let theActors = await getActors(); // from postgresql
+        let theActors = await actorsDal.getActors(); // from postgresql
         res.render('actors', {theActors});
     } catch {
         res.render('503');
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
     //     {first_name: 'Regina', last_name: 'King'}
     // ];
     try {
-        let anActor = await getActorByActorId(req.params.id); // from postgresql
+        let anActor = await actorsDal.getActorByActorId(req.params.id); // from postgresql
         if (anActor.length === 0)
             res.render('norecord')
         else
@@ -31,15 +31,64 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/replace', async (req, res) => {
+    if(DEBUG) console.log('actor.Replace : ' + req.params.id);
+    res.render('actorPut.ejs', {firstName: req.query.firstName, lastName: req.query.lastName, theId: req.params.id});
+});
+
+router.get('/:id/edit', async (req, res) => {
+    if(DEBUG) console.log('actor.Edit : ' + req.params.id);
+    res.render('actorPatch.ejs', {firstName: req.query.firstName, lastName: req.query.lastName, theId: req.params.id});
+});
+
+router.get('/:id/delete', async (req, res) => {
+    if(DEBUG) console.log('actor.Delete : ' + req.params.id);
+    res.render('actorDelete.ejs', {firstName: req.query.firstName, lastName: req.query.lastName, theId: req.params.id});
+});
+
 router.post('/', async (req, res) => {
     if(DEBUG) console.log("actors.POST");
     try {
-        await addActor(req.body.firstName, req.body.lastName );
+        await actorsDal.addActor(req.body.firstName, req.body.lastName );
         res.redirect('/actors/');
     } catch {
         // log this error to an error log file.
         res.render('503');
     } 
+});
+
+// PUT, PATCH, and DELETE are part of HTTP, not a part of HTML
+// Therefore, <form method="PUT" ...> doesn't work, but it does work for RESTful API
+
+router.put('/:id', async (req, res) => {
+    if(DEBUG) console.log('actors.PUT: ' + req.params.id);
+    try {
+        await actorsDal.putActor(req.params.id, req.body.firstName, req.body.lastName);
+        res.redirect('/actors/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    }
+});
+router.patch('/:id', async (req, res) => {
+    if(DEBUG) console.log('actors.PATCH: ' + req.params.id);
+    try {
+        await actorsDal.patchActor(req.params.id, req.body.firstName, req.body.lastName);
+        res.redirect('/actors/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    }
+});
+router.delete('/:id', async (req, res) => {
+    if(DEBUG) console.log('actors.DELETE: ' + req.params.id);
+    try {
+        await actorsDal.deleteActor(req.params.id, req.body.firstName, req.body.lastName);
+        res.redirect('/actors/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    }
 });
 
 module.exports = router

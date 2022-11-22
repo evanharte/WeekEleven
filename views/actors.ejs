@@ -7,12 +7,10 @@
                 <b>Actors: </b></br> 
             <% if (theActors.length > 0) { %>
                 <% theActors.forEach(actor => { %>
-                    <b><%= actor.first_name %> <%= actor.last_name %></b></br>
-                    <!--
-                    <a href="<%=actor.actor_id%>/edit?fname=<%=actor.first_name%>&lname=<%=actor.last_name%>">edit</a>
-                    <a href="<%=actor.actor_id%>/delete?fname=<%=actor.first_name%>&lname=<%=actor.last_name%>">delete</a>
-                    <a href="<%=actor.actor_id%>/replace?fname=<%=actor.first_name%>&lname=<%=actor.last_name%>">replace</a></br> 
-                    --> 
+                    <b><%= actor.first_name %> <%= actor.last_name %></b>
+                    <a href="/actors/<%=actor.actor_id%>/edit?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">edit</a>
+                    <a href="/actors/<%=actor.actor_id%>/delete?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">delete</a>
+                    <a href="/actors/<%=actor.actor_id%>/replace?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">replace</a></br> 
                     <% }) %>
             <% } %>
             </br><label>Add Actor:</label></br>

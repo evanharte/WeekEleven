@@ -49,9 +49,50 @@ var addActor = function(fname, lname) {
     }); 
   });
 };
+var putActor = function(id, fname, lname) {
+  if(DEBUG) console.log("actors.dal.putActor()");
+  return new Promise(function(resolve, reject) {
+    const sql = "UPDATE public.actor SET first_name=$2, last_name=$3 WHERE actor_id=$1;";
+    dal.query(sql, [id, fname, lname], (err, result) => {
+      if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+};
+var patchActor = function(id, fname, lname) {
+  if(DEBUG) console.log("actors.dal.patchActor()");
+  return new Promise(function(resolve, reject) {
+    const sql = "UPDATE public.actor SET first_name=$2, last_name=$3 WHERE actor_id=$1;";
+    dal.query(sql, [id, fname, lname], (err, result) => {
+      if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+};
+var deleteActor = function(id) {
+  return new Promise(function(resolve, reject) {
+    const sql = "DELETE FROM public.actor WHERE actor_id = $1;";
+    dal.query(sql, [id], (err, result) => {
+      if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+    }); 
+  });
+};
 
 module.exports = {
     getActors,
     getActorByActorId,
     addActor,
+    putActor,
+    patchActor,
+    deleteActor,
 }
