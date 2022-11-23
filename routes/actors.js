@@ -83,7 +83,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     if(DEBUG) console.log('actors.DELETE: ' + req.params.id);
     try {
-        await actorsDal.deleteActor(req.params.id, req.body.firstName, req.body.lastName);
+        await actorsDal.deleteActor(req.params.id);
         res.redirect('/actors/');
     } catch {
         // log this error to an error log file.
