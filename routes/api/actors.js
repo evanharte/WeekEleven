@@ -1,11 +1,12 @@
 var router = require('express').Router();
-const actorsDal = require('../../services/actors.dal')
+//const actorsDal = require('../../services/pg.actors.dal')
+const actorsDal = require('../../services/m.actors.dal')
 
 // api/actors
 router.get('/', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/actors/ GET ' + req.url);
     try {
-        let theActors = await actorsDal.getActors(); // from postgresql
+        let theActors = await actorsDal.getActors(); 
         res.json(theActors);
     } catch {
         // log this error to an error log file.
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/actors/:id GET ' + req.url);
     try {
-        let anActor = await actorsDal.getActorByActorId(req.params.id); // from postgresql
+        let anActor = await actorsDal.getActorByActorId(req.params.id); 
         if (anActor.length === 0) {
             // log this error to an error log file.
             res.statusCode = 404;

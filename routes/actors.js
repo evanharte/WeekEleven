@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const actorsDal = require('../services/actors.dal')
+// const actorsDal = require('../services/pg.actors.dal')
+const actorsDal = require('../services/m.actors.dal')
 
 router.get('/', async (req, res) => {
     // const theActors = [
@@ -9,7 +10,8 @@ router.get('/', async (req, res) => {
     //     {first_name: 'Regina', last_name: 'King'}
     // ];
     try {
-        let theActors = await actorsDal.getActors(); // from postgresql
+        let theActors = await actorsDal.getActors(); 
+        if(DEBUG) console.table(theActors);
         res.render('actors', {theActors});
     } catch {
         res.render('503');
