@@ -8,9 +8,9 @@
             <% if (theActors.length > 0) { %>
                 <% theActors.forEach(actor => { %>
                     <b><%= actor.first_name %> <%= actor.last_name %></b>
-                    <a href="/actors/<%=actor.actor_id%>/edit?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">edit</a>
-                    <a href="/actors/<%=actor.actor_id%>/delete?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">delete</a>
-                    <a href="/actors/<%=actor.actor_id%>/replace?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">replace</a></br> 
+                    <a href="/actors/<%=actor._id%>/edit?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">edit</a>
+                    <a href="/actors/<%=actor._id%>/delete?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">delete</a>
+                    <a href="/actors/<%=actor._id%>/replace?firstName=<%=actor.first_name%>&lastName=<%=actor.last_name%>">replace</a></br> 
                     <% }) %>
             <% } %>
             </br><label>Add Actor:</label></br>
