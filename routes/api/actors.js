@@ -1,6 +1,5 @@
 var router = require('express').Router();
-//const actorsDal = require('../../services/pg.actors.dal')
-const actorsDal = require('../../services/m.actors.dal')
+const actorsDal = require('../../services/pg.actors.dal')
 
 // api/actors
 router.get('/', async (req, res) => {
@@ -84,12 +83,11 @@ router.delete('/:id', async (req, res) => {
     }
 });
 // list the active api routes
-if(DEBUG) {
-    router.stack.forEach(function(r){
-        if (r.route && r.route.path){
-        console.log(r.route.path)
-        }
-    });
-}
-
+// if(DEBUG) {
+//     router.stack.forEach(function(r){
+//         if (r.route && r.route.path){
+//         console.log(r.route.path)
+//         }
+//     });
+// }
 module.exports = router;
