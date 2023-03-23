@@ -1,4 +1,4 @@
-const dal = require("./pdb");
+const dal = require("./dvdrental_db");
 
 //get all actors.
 var getActors = function() {

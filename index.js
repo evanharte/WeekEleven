@@ -19,6 +19,9 @@ app.get('/about', (request, response) => {
 const actorsRouter = require('./routes/actors')
 app.use('/actors', actorsRouter);
 
+const loginsRouter = require('./routes/logins')
+app.use('/logins', loginsRouter);
+
 // anything beginning with "/api" will go into this
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter);
