@@ -16,7 +16,7 @@ async function getActorByActorId(id) {
   if(DEBUG) console.log("actors.mongo.dal.getActorByActorId()");
   try {
     await dal.connect();
-    const result = dal.db("Auth").collection("actor").findOne({ _id: ObjectId(id) });
+    const result = dal.db("Auth").collection("actor").findOne({ _id: new ObjectId(id) });
     return result;
   } catch(error) {
     console.log(error);
@@ -38,7 +38,7 @@ async function putActor(id, fname, lname) {
   try {
     await dal.connect();
     const result = await dal.db("Auth").collection("actor")
-      .replaceOne({_id: ObjectId(id)},
+      .replaceOne({_id: new ObjectId(id)},
         {first_name: fname, last_name: lname}
         );
     return result;
@@ -51,7 +51,7 @@ async function patchActor(id, fname, lname) {
   try {
     await dal.connect();
     const result = await dal.db("Auth").collection("actor")
-      .updateOne({_id: ObjectId(id)},
+      .updateOne({_id: new ObjectId(id)},
         {$set: {first_name: fname, last_name: lname}},
         {upsert: true, returnDocument: 'after'}
         );
@@ -64,7 +64,7 @@ async function deleteActor(id) {
   if(DEBUG) console.log("actors.mongo.dal.deleteActor()");
   try {
     await dal.connect();
-    const result = dal.db("Auth").collection("actor").deleteOne({ _id: ObjectId(id) });
+    const result = dal.db("Auth").collection("actor").deleteOne({ _id: new ObjectId(id) });
     return result;
   } catch(error) {
     console.log(error);
