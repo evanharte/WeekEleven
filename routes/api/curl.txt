@@ -9,3 +9,5 @@ curl -X GET http://localhost:3000/api/actors/
 curl -X DELETE http://localhost:3000/api/actors/999
 
 http://localhost:3000/api/actors?firstName=Bilbo&lastName=Baggins
+
+curl -d "userame=bokatan&password=mando" -X PATCH http://localhost:3000/api/logins
