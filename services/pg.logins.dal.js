@@ -1,6 +1,6 @@
 const dal = require("./auth_db");
 
-//get all actors.
+//get all logins.
 var getLogins = function() {
   if(DEBUG) console.log("logins.pg.dal.getLogins()");
   return new Promise(function(resolve, reject) {

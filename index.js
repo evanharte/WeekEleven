@@ -6,7 +6,7 @@ const PORT = 3000;
 global.DEBUG = true;
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true, })); // This is important!
+//app.use(express.urlencoded({ extended: true, })); // This is important!
 app.use(methodOverride('_method')); // So is this!
 
 app.get('/', (req, res) => {
@@ -21,6 +21,9 @@ app.use('/actors', actorsRouter);
 
 const loginsRouter = require('./routes/logins')
 app.use('/logins', loginsRouter);
+
+const usersRouter = require('./routes/users')
+app.use('/users', usersRouter);
 
 // anything beginning with "/api" will go into this
 const apiRouter = require('./routes/api')
