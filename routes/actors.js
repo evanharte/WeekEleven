@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-//const actorsDal = require('../services/pg.actors.dal')
-const actorsDal = require('../services/m.actors.dal')
+const actorsDal = require('../services/pg.actors.dal')
+// const actorsDal = require('../services/m.actors.dal')
 
 router.get('/', async (req, res) => {
     // const theActors = [
