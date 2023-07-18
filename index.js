@@ -3,10 +3,10 @@ const methodOverride = require('method-override');
 const app = express();
 const PORT = 3000;
 
-global.DEBUG = true;
+global.DEBUG = false;
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-//app.use(express.urlencoded({ extended: true, })); // This is important!
+app.use(express.urlencoded({ extended: true, })); // This is important!
 app.use(methodOverride('_method')); // So is this!
 
 app.get('/', (req, res) => {

@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) { 
         console.log('ROUTE: /api/actors/ POST');
-    //    console.log(req);
+        console.log(req);
     }
     try {
         await actorsDal.addActor(req.body.firstName, req.body.lastName );
