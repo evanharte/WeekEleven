@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const actorsDal = require('../services/pg.actors.dal')
-// const actorsDal = require('../services/m.actors.dal')
+//const actorsDal = require('../services/m.actors.dal')
 
 router.get('/', async (req, res) => {
     // const theActors = [
@@ -87,7 +87,8 @@ router.delete('/:id', async (req, res) => {
     try {
         await actorsDal.deleteActor(req.params.id);
         res.redirect('/actors/');
-    } catch {
+    } catch (err) {
+        if(DEBUG) console.error(err);
         // log this error to an error log file.
         res.render('503');
     }
