@@ -10,6 +10,8 @@ async function getActors() {
     return results;
   } catch(error) {
     console.log(error);
+  } finally {
+    dal.close();
   }
 };
 async function getActorByActorId(id) {
