@@ -1,6 +1,6 @@
 var router = require('express').Router();
-const actorsDal = require('../../services/pg.actors.dal')
-//const actorsDal = require('../../services/m.actors.dal')
+// const actorsDal = require('../../services/pg.actors.dal')
+const actorsDal = require('../../services/m.actors.dal')
 
 // api/actors
 router.get('/', async (req, res) => {
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     if(DEBUG) { 
         console.log('ROUTE: /api/actors/ POST');
-        console.log(req);
+        // console.log(req);
     }
     try {
         await actorsDal.addActor(req.body.firstName, req.body.lastName );
@@ -83,7 +83,7 @@ router.delete('/:id', async (req, res) => {
         res.json({message: "Service Unavailable", status: 503});
     }
 });
-// list the active api routes
+// // list the active api routes
 // if(DEBUG) {
 //     router.stack.forEach(function(r){
 //         if (r.route && r.route.path){

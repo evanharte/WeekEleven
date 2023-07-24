@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const actorsDal = require('../services/pg.actors.dal')
-//const actorsDal = require('../services/m.actors.dal')
+//const actorsDal = require('../services/pg.actors.dal')
+const actorsDal = require('../services/m.actors.dal')
 
 router.get('/', async (req, res) => {
     // const theActors = [
@@ -23,11 +23,12 @@ router.get('/:id', async (req, res) => {
     //     {first_name: 'Regina', last_name: 'King'}
     // ];
     try {
-        let anActor = await actorsDal.getActorByActorId(req.params.id); // from postgresql
-        if (anActor.length === 0)
-            res.render('norecord')
-        else
+        const anActor = await actorsDal.getActorByActorId(req.params.id); // from postgresql
+        if(DEBUG) console.log(`actors.router.get/:id ${anActor}`);
+        if (anActor)
             res.render('actor', {anActor});
+        else
+            res.render('norecord');
     } catch {
         res.render('503');
     }

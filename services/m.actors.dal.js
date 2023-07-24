@@ -16,18 +16,25 @@ async function getActorByActorId(id) {
   if(DEBUG) console.log("actors.mongo.dal.getActorByActorId()");
   try {
     await dal.connect();
-    const result = dal.db("Auth").collection("actor").findOne({ _id: new ObjectId(id) });
+    const database = dal.db("Auth");
+    const collection = database.collection("actor");
+    const result = await collection.find({ _id: new ObjectId(id) }).toArray();
+    if(DEBUG) console.log(result);
     return result;
-  } catch(error) {
-    console.log(error);
+  } catch(err) {
+    console.error('Error occurred while connecting to MongoDB:', err);
+    throw err;
+  } finally {
+    dal.close();
   }
 };
 async function addActor(firstName, lastName) {
   if(DEBUG) console.log("actors.mongo.dal.addActor()");
-  let newLogin = JSON.parse(`{ "first_name": "` + firstName + `", "last_name": "` + lastName + `" }`);
+  let newActor = JSON.parse(`{ "first_name": "` + firstName + `", "last_name": "` + lastName + `" }`);
+  if(DEBUG) console.log(newActor);
   try {
     await dal.connect();
-    const result = await dal.db("Auth").collection("actor").insertOne(newLogin);
+    const result = await dal.db("Auth").collection("actor").insertOne(newActor);
     return result.insertedId;
   } catch(error) {
     console.log(error);
