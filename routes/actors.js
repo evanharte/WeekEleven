@@ -3,6 +3,7 @@ const router = express.Router();
 //const actorsDal = require('../services/pg.actors.dal')
 const actorsDal = require('../services/m.actors.dal')
 
+// https://localhost:3000/actors/
 router.get('/', async (req, res) => {
     // const theActors = [
     //     {first_name: 'Youn', last_name: 'Yuh-jung'},
@@ -39,6 +40,7 @@ router.get('/:id/replace', async (req, res) => {
     res.render('actorPut.ejs', {firstName: req.query.firstName, lastName: req.query.lastName, theId: req.params.id});
 });
 
+// https://localhost:3000/actors/205/edit
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('actor.Edit : ' + req.params.id);
     res.render('actorPatch.ejs', {firstName: req.query.firstName, lastName: req.query.lastName, theId: req.params.id});

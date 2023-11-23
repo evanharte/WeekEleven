@@ -23,9 +23,9 @@ async function getActorByActorId(id) {
     const result = await collection.find({ _id: new ObjectId(id) }).toArray();
     if(DEBUG) console.log(result);
     return result;
-  } catch(err) {
-    console.error('Error occurred while connecting to MongoDB:', err);
-    throw err;
+  } catch(error) {
+    console.error('Error occurred while connecting to MongoDB:', error);
+    throw error;
   } finally {
     dal.close();
   }
@@ -40,8 +40,12 @@ async function addActor(firstName, lastName) {
     return result.insertedId;
   } catch(error) {
     console.log(error);
+    throw error;
+  } finally {
+    dal.close();
   }
 };
+
 async function putActor(id, fname, lname) {
   if(DEBUG) console.log("actors.mongo.dal.putActor()");
   try {
@@ -53,6 +57,9 @@ async function putActor(id, fname, lname) {
     return result;
   } catch(error) {
     console.log(error);
+    throw error;
+  } finally {
+    dal.close();
   }
 };
 async function patchActor(id, fname, lname) {
@@ -67,16 +74,22 @@ async function patchActor(id, fname, lname) {
     return result;
   } catch(error) {
     console.log(error);
+    throw error;
+  } finally {
+    dal.close();
   }
 };
 async function deleteActor(id) {
   if(DEBUG) console.log("actors.mongo.dal.deleteActor()");
   try {
     await dal.connect();
-    const result = dal.db("Auth").collection("actor").deleteOne({ _id: new ObjectId(id) });
+    const result = await dal.db("Auth").collection("actor").deleteOne({ _id: new ObjectId(id) });
     return result;
   } catch(error) {
     console.log(error);
+    throw error;
+  } finally {
+    dal.close();
   }
 };
 
