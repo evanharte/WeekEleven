@@ -9,8 +9,7 @@
                 <% theLogins.forEach(login => { %>
                     <b><%= login.username %></b>
                     <a href="/logins/<%=login.id%>/edit?username=<%=login.username%>">edit</a>
-                    <a href="/logins/<%=login.id%>/delete?username=<%=login.username%>">delete</a>
-                    <a href="/logins/<%=login.id%>/replace?username=<%=login.username%>">replace</a></br> 
+                    <a href="/logins/<%=login.id%>/delete?username=<%=login.username%>">delete</a></br> 
                     <% }) %>
             <% } %>
             </br><label>Add Login:</label></br>

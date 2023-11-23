@@ -1,4 +1,4 @@
-CREATE DATABASE auth
+CREATE DATABASE Auth
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
