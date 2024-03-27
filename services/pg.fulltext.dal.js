@@ -4,8 +4,8 @@ var getFullText = function(text) {
   if(DEBUG) console.log("pg.dal.getFullText()");
   return new Promise(function(resolve, reject) {
      const sql = `SELECT title, description FROM film \
-        WHERE description LIKE '%'||$1||'%' \
-        OR title LIKE '%'||$1||'%'`;
+        WHERE description iLIKE '%'||$1||'%' \
+        OR title iLIKE '%'||$1||'%'`;
     if(DEBUG) console.log(sql);
     dal.query(sql, [text], (err, result) => {
       if (err) {
