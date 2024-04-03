@@ -9,7 +9,10 @@
       <a href="/search">Search Again</a>
     </button>
     <% results.forEach(function(result) { %>
-    <p>TITLE: <%= result.title %>, DESCRIPTION: <%= result.description %></p>
+    <p>
+      TITLE: <%= result.title %>, DESCRIPTION: <%= result.plot ||
+      result.description %>
+    </p>
     <% }); %>
   </body>
 </html>

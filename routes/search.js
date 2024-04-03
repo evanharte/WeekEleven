@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getFullText } = require("../services/pg.fulltext.dal");
+// const { getFullText } = require("../services/pg.fulltext.dal");
+const { getFullText } = require("../services/m.fulltext.dal");
 
 // Route to render search.ejs
 router.get("/", async (req, res) => {
