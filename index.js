@@ -10,11 +10,13 @@ app.use(express.urlencoded({ extended: false })); // This is important!
 app.use(methodOverride("_method")); // So is this!
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { name: "Cassian Andor" });
+  res.render("index.ejs", { person: "Evan Harte" });
 });
-app.get("/about", (request, response) => {
-  response.render("about.ejs");
+
+app.get("/about", (req, res) => {
+  res.render("about.ejs");
 });
+
 // app.get("/search", (request, response) => {
 //   response.render("search.ejs");
 // });
